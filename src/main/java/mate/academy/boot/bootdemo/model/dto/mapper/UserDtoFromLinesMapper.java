@@ -7,11 +7,10 @@ import mate.academy.boot.bootdemo.model.dto.UserDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserDtoFromFileMapper {
+public class UserDtoFromLinesMapper {
 
-    public UserDto getUserDtoFromFile(String line) {
+    public UserDto getUserDtoFromLines(String[] userData) {
         UserDto userDto = new UserDto();
-        String[] userData = line.split(",");
         userDto.setId(Long.valueOf(userData[0]));
         userDto.setProductId(userData[1]);
         userDto.setUserId(userData[2]);

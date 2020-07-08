@@ -4,16 +4,16 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.util.List;
 import mate.academy.boot.bootdemo.model.dto.UserDto;
-import mate.academy.boot.bootdemo.model.dto.mapper.UserDtoFromFileMapper;
-import mate.academy.boot.bootdemo.service.impl.CsvFileParser;
+import mate.academy.boot.bootdemo.model.dto.mapper.UserDtoFromLinesMapper;
+import mate.academy.boot.bootdemo.service.impl.CsvLinesParser;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class CsvParserTest {
 
-    private UserDtoFromFileMapper mapper = new UserDtoFromFileMapper();
+    private UserDtoFromLinesMapper mapper = new UserDtoFromLinesMapper();
 
-    private CsvFileParser parser = new CsvFileParser(mapper);
+    private CsvLinesParser parser = new CsvLinesParser(mapper);
 
     @Test
     public void csvParserTest() {
