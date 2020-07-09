@@ -2,10 +2,10 @@ package mate.academy.boot.bootdemo.service;
 
 import java.io.File;
 import java.util.List;
-
 import mate.academy.boot.bootdemo.service.impl.FileReaderServiceImpl;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.Assert.assertTrue;
 
 public class FileReaderTest {
