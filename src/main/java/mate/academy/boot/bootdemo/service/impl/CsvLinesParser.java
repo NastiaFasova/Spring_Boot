@@ -8,7 +8,7 @@ import mate.academy.boot.bootdemo.service.FileParser;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CsvLinesParser implements FileParser {
+public class CsvLinesParser implements FileParser<List<UserDto>> {
     private final UserDtoFromLinesMapper mapper;
 
     public CsvLinesParser(UserDtoFromLinesMapper mapper) {
