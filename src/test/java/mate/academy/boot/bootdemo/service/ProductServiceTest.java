@@ -3,6 +3,7 @@ package mate.academy.boot.bootdemo.service;
 import java.util.List;
 import java.util.Optional;
 import mate.academy.boot.bootdemo.model.Product;
+import mate.academy.boot.bootdemo.repository.ProductRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,6 +38,14 @@ public class ProductServiceTest {
 
     @Test
     public void findAllProductsTest() {
+        productService.save(firstProduct);
+        productService.save(secondProduct);
         Assert.assertEquals(List.of(firstProduct, secondProduct), productService.findAll());
+    }
+
+    @Test
+    public void findMostCommentedProductsTest() {
+        Assert.assertEquals(List.of(firstProduct.getId()), productService.getMostCommentedProducts(1));
+        Assert.assertEquals(List.of(secondProduct.getId(), firstProduct.getId()), productService.getMostCommentedProducts(10));
     }
 }
