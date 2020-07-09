@@ -11,5 +11,5 @@ public interface ProductService {
 
     Optional<Product> findById(Long id);
 
-    List<Long> getMostCommentedProducts(int limit);
+    List<Product> getMostCommentedProducts(int limit);
 }

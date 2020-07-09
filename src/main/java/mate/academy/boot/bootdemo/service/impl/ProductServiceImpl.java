@@ -34,9 +34,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Long> getMostCommentedProducts(int limit) {
-        return manager.createQuery("SELECT p.id FROM Product p "
-                + "GROUP BY p.id ORDER BY COUNT(p.id) desc", Long.class)
+    public List<Product> getMostCommentedProducts(int limit) {
+        return manager.createQuery("SELECT new Product(p.id) FROM Product p "
+                + "GROUP BY p.id ORDER BY COUNT(p.id) desc", Product.class)
                 .setMaxResults(limit).getResultList();
     }
 }

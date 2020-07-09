@@ -3,6 +3,7 @@ package mate.academy.boot.bootdemo.service;
 import java.util.List;
 import java.util.Optional;
 import mate.academy.boot.bootdemo.model.Review;
+import mate.academy.boot.bootdemo.model.User;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,8 +45,10 @@ public class ReviewServiceTest {
 
     @Test
     public void findMostActiveUsersTest() {
-        Assert.assertEquals(List.of(firstReview.getProfileName()), reviewService.getMostActiveUsers(1));
-        Assert.assertEquals(List.of(secondReview.getProfileName(), firstReview.getProfileName()),
+        Assert.assertEquals(List.of(new User(firstReview.getProfileName())),
+                reviewService.getMostActiveUsers(1));
+        Assert.assertEquals(List.of(new User(secondReview.getProfileName()),
+                new User(firstReview.getProfileName())),
                 reviewService.getMostActiveUsers(10));
     }
 }

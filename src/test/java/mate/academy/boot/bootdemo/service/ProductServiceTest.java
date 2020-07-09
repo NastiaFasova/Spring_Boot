@@ -45,7 +45,7 @@ public class ProductServiceTest {
 
     @Test
     public void findMostCommentedProductsTest() {
-        Assert.assertEquals(List.of(firstProduct.getId()), productService.getMostCommentedProducts(1));
-        Assert.assertEquals(List.of(secondProduct.getId(), firstProduct.getId()), productService.getMostCommentedProducts(10));
+        Assert.assertEquals(List.of(firstProduct), productService.getMostCommentedProducts(1));
+        Assert.assertEquals(List.of(secondProduct, firstProduct), productService.getMostCommentedProducts(10));
     }
 }

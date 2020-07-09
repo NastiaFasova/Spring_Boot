@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.persistence.EntityManager;
 import mate.academy.boot.bootdemo.model.Review;
+import mate.academy.boot.bootdemo.model.User;
 import mate.academy.boot.bootdemo.repository.ReviewRepository;
 import mate.academy.boot.bootdemo.service.ReviewService;
 import org.springframework.stereotype.Service;
@@ -34,10 +35,10 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<String> getMostActiveUsers(int limit) {
-        return manager.createQuery("SELECT r.profileName from Review r "
+    public List<User> getMostActiveUsers(int limit) {
+        return manager.createQuery("SELECT new User(r.profileName) from Review r "
                         + "GROUP BY r.profileName ORDER BY COUNT(r.profileName) desc",
-                String.class)
+                User.class)
                 .setMaxResults(limit).getResultList();
     }
 }

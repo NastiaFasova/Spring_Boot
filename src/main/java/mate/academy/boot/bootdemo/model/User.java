@@ -20,10 +20,15 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String profileName;
     @OneToMany(mappedBy = "user")
     private Set<Review> reviews;
 
     public User(Long id) {
         this.id = id;
+    }
+
+    public User(String profileName) {
+        this.profileName = profileName;
     }
 }
