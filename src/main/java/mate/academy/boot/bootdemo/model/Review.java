@@ -1,7 +1,10 @@
 package mate.academy.boot.bootdemo.model;
 
 import java.time.LocalDateTime;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,9 +29,10 @@ public class Review {
     private Long score;
     private LocalDateTime time;
     private String summary;
+    @Column(length = 50000)
     private String text;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Product product;
 }

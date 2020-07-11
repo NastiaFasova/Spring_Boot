@@ -14,5 +14,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findAll();
 
     @Query("select new User(u.id) from User u LEFT JOIN u.reviews WHERE u.id = ?1")
-    Optional<User> findById(Long id);
+    Optional<User> findById(String id);
 }

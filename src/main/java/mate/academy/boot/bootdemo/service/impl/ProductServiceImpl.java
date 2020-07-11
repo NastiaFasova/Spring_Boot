@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> findById(Long id) {
+    public Optional<Product> findById(String id) {
         return productRepository.findById(id);
     }
 

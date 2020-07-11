@@ -18,8 +18,8 @@ public class ProductServiceTest {
 
     @Before
     public void setUp() {
-        firstProduct.setId(1L);
-        secondProduct.setId(2L);
+        firstProduct.setId("1234");
+        secondProduct.setId("10988");
         productService.save(firstProduct);
         productService.save(secondProduct);
     }
@@ -32,20 +32,20 @@ public class ProductServiceTest {
 
     @Test
     public void findProductById()   {
-        Assert.assertEquals(Optional.of(firstProduct), productService.findById(1L));
-        Assert.assertEquals(Optional.of(secondProduct), productService.findById(2L));
+        Assert.assertEquals(Optional.of(firstProduct), productService.findById("1234"));
+        Assert.assertEquals(Optional.of(secondProduct), productService.findById("10988"));
     }
 
     @Test
     public void findAllProductsTest() {
         productService.save(firstProduct);
         productService.save(secondProduct);
-        Assert.assertEquals(List.of(firstProduct, secondProduct), productService.findAll());
+        Assert.assertEquals(List.of(secondProduct, firstProduct), productService.findAll());
     }
 
     @Test
     public void findMostCommentedProductsTest() {
-        Assert.assertEquals(List.of(firstProduct), productService.getMostCommentedProducts(1));
-        Assert.assertEquals(List.of(secondProduct, firstProduct), productService.getMostCommentedProducts(10));
+        Assert.assertEquals(List.of(secondProduct), productService.getMostCommentedProducts(1));
+        Assert.assertEquals(List.of(firstProduct, secondProduct), productService.getMostCommentedProducts(10));
     }
 }

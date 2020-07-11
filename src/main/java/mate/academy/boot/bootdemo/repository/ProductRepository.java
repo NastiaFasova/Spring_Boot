@@ -14,5 +14,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAll();
 
     @Query("select new Product(p.id) from Product p LEFT JOIN p.reviews WHERE p.id = ?1")
-    Optional<Product> findById(Long id);
+    Optional<Product> findById(String id);
 }

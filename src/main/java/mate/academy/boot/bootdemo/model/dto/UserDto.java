@@ -8,8 +8,6 @@ import mate.academy.boot.bootdemo.model.Review;
 @Data
 public class UserDto {
     @NotNull
-    private Long id;
-    @NotNull
     private String profileName;
     private Set<Review> reviews;
 }

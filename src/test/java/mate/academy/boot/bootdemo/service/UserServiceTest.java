@@ -17,8 +17,8 @@ public class UserServiceTest {
 
     @Before
     public void setUp() {
-        firstUser.setId(1L);
-        secondUser.setId(2L);
+        firstUser.setId("657784");
+        secondUser.setId("65784");
         userService.save(firstUser);
         userService.save(secondUser);
     }
@@ -31,8 +31,8 @@ public class UserServiceTest {
 
     @Test
     public void findUserById()   {
-        Assert.assertEquals(Optional.of(firstUser), userService.findById(1L));
-        Assert.assertEquals(Optional.of(secondUser), userService.findById(2L));
+        Assert.assertEquals(Optional.of(firstUser), userService.findById("657784"));
+        Assert.assertEquals(Optional.of(secondUser), userService.findById("65784"));
     }
 
     @Test

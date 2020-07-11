@@ -1,13 +1,11 @@
 package mate.academy.boot.bootdemo.model.dto;
 
-import java.time.LocalDateTime;
 import lombok.Data;
 
-import javax.persistence.Column;
+import java.time.LocalDateTime;
 
 @Data
-public class ReviewDto {
-    private Long id;
+public class ReviewLineDto {
     private String productId;
     private String userId;
     private String profileName;
@@ -15,8 +13,6 @@ public class ReviewDto {
     private Long helpfulnessDenominator;
     private Long score;
     private LocalDateTime time;
-    @Column(length = 1000)
     private String summary;
-    @Column(length = 1000)
     private String text;
 }

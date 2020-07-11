@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -30,8 +31,8 @@ public class ProductController {
         productService.save(productMapper.getProduct(productDto));
     }
 
-    @GetMapping("/{id}")
-    public ProductDto getProductById(@PathVariable Long id) {
+    @GetMapping("/by-id")
+    public ProductDto getProductById(@RequestParam(name = "id") String id) {
         return productMapper.getProductDto(productService.findById(id).orElseThrow());
     }
 
