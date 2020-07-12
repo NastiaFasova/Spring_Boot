@@ -8,7 +8,6 @@ import mate.academy.boot.bootdemo.model.dto.ProductDto;
 import mate.academy.boot.bootdemo.model.mapper.ProductMapper;
 import mate.academy.boot.bootdemo.service.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +30,7 @@ public class ProductController {
         productService.save(productMapper.getProduct(productDto));
     }
 
-    @GetMapping("/by-id")
+    @GetMapping("/product")
     public ProductDto getProductById(@RequestParam(name = "id") String id) {
         return productMapper.getProductDto(productService.findById(id).orElseThrow());
     }
@@ -44,9 +43,11 @@ public class ProductController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/most-commented-food-items/{limit}")
-    public List<ProductDto> getMostCommentedFood(@PathVariable int limit) {
-        List<Product> products = productService.getMostCommentedProducts(limit);
+    @GetMapping("/most-commented-food-items")
+    public List<ProductDto> getMostCommentedFood(@RequestParam(name = "limit", required = false,
+            defaultValue = "0")int page, @RequestParam(name = "limit", required = false,
+            defaultValue = "1000") int limit) {
+        List<Product> products = productService.getMostCommentedProducts(page, limit);
         return products.stream()
                 .map(productMapper::getProductDto)
                 .collect(Collectors.toList());

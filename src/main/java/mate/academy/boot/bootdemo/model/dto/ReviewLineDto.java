@@ -1,8 +1,7 @@
 package mate.academy.boot.bootdemo.model.dto;
 
-import lombok.Data;
-
 import java.time.LocalDateTime;
+import lombok.Data;
 
 @Data
 public class ReviewLineDto {

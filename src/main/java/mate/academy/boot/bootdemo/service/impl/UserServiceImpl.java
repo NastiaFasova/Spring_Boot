@@ -5,6 +5,7 @@ import java.util.Optional;
 import mate.academy.boot.bootdemo.model.User;
 import mate.academy.boot.bootdemo.repository.UserRepository;
 import mate.academy.boot.bootdemo.service.UserService;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,6 +29,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findById(String id) {
         return userRepository.findById(id);
+    }
+
+    @Override
+    public List<User> findActiveUsers(int page, int limit) {
+        PageRequest pageRequest = PageRequest.of(page, limit);
+        return userRepository.findAll(pageRequest).getContent();
     }
 
 }

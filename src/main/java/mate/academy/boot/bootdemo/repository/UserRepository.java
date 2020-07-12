@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query("select new User(u.id) from User u LEFT JOIN u.reviews")
+    @Query("select r.user from Review r")
     List<User> findAll();
 
-    @Query("select new User(u.id) from User u LEFT JOIN u.reviews WHERE u.id = ?1")
+    @Query("select r.user from Review r where r.user.id = :id")
     Optional<User> findById(String id);
 }

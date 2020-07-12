@@ -1,12 +1,9 @@
 package mate.academy.boot.bootdemo.service.impl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
+import java.util.ArrayList;
+import java.util.List;
 import mate.academy.boot.bootdemo.model.dto.ReviewLineDto;
 import mate.academy.boot.bootdemo.model.mapper.ReviewFromLinesMapper;
 import mate.academy.boot.bootdemo.service.FileParser;

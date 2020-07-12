@@ -8,4 +8,5 @@ import lombok.Data;
 public class ProductDto {
     @NotNull
     private String id;
+    private Set<String> reviews;
 }

@@ -4,9 +4,6 @@ import mate.academy.boot.bootdemo.model.Product;
 import mate.academy.boot.bootdemo.model.Review;
 import mate.academy.boot.bootdemo.model.User;
 import mate.academy.boot.bootdemo.model.dto.ReviewDto;
-import mate.academy.boot.bootdemo.model.dto.ReviewLineDto;
-import mate.academy.boot.bootdemo.service.ProductService;
-import mate.academy.boot.bootdemo.service.UserService;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,6 +11,7 @@ public class ReviewMapper {
 
     public ReviewDto getReviewDto(Review review) {
         ReviewDto reviewDto = new ReviewDto();
+        reviewDto.setId(review.getId());
         reviewDto.setProfileName(review.getProfileName());
         reviewDto.setHelpfulnessDenominator(review.getHelpfulnessDenominator());
         reviewDto.setHelpfulnessNumerator(review.getHelpfulnessNumerator());
@@ -27,6 +25,7 @@ public class ReviewMapper {
 
     public Review getReview(ReviewDto reviewDto) {
         Review review = new Review();
+        review.setId(reviewDto.getId());
         review.setProfileName(reviewDto.getProfileName());
         review.setHelpfulnessDenominator(reviewDto.getHelpfulnessDenominator());
         review.setHelpfulnessNumerator(reviewDto.getHelpfulnessNumerator());

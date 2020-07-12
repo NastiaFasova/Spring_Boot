@@ -6,7 +6,6 @@ import mate.academy.boot.bootdemo.model.InternetUser;
 import mate.academy.boot.bootdemo.model.Role;
 import mate.academy.boot.bootdemo.service.InternetUserService;
 import mate.academy.boot.bootdemo.service.RoleService;
-import org.apache.log4j.Logger;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +14,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final InternetUserService internetUserService;
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
-    private static final Logger LOGGER = Logger.getLogger(AuthenticationServiceImpl.class);
 
-    public AuthenticationServiceImpl(InternetUserService internetUserService, RoleService roleService, PasswordEncoder passwordEncoder) {
+    public AuthenticationServiceImpl(InternetUserService internetUserService,
+                                     RoleService roleService, PasswordEncoder passwordEncoder) {
         this.internetUserService = internetUserService;
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;

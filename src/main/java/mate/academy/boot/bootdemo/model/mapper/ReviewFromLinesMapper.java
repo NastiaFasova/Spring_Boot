@@ -3,12 +3,7 @@ package mate.academy.boot.bootdemo.model.mapper;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Arrays;
-
-import mate.academy.boot.bootdemo.model.Review;
-import mate.academy.boot.bootdemo.model.dto.ReviewDto;
 import mate.academy.boot.bootdemo.model.dto.ReviewLineDto;
-import mate.academy.boot.bootdemo.service.ProductService;
 import org.springframework.stereotype.Component;
 
 @Component

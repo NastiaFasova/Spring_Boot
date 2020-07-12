@@ -1,5 +1,8 @@
 package mate.academy.boot.bootdemo.controllers;
 
+import java.util.List;
+import java.util.Set;
+import javax.annotation.PostConstruct;
 import mate.academy.boot.bootdemo.model.InternetUser;
 import mate.academy.boot.bootdemo.model.Product;
 import mate.academy.boot.bootdemo.model.Review;
@@ -7,9 +10,7 @@ import mate.academy.boot.bootdemo.model.Role;
 import mate.academy.boot.bootdemo.model.User;
 import mate.academy.boot.bootdemo.model.dto.ReviewLineDto;
 import mate.academy.boot.bootdemo.model.mapper.ProductMapper;
-import mate.academy.boot.bootdemo.model.mapper.ReviewFromLinesMapper;
 import mate.academy.boot.bootdemo.model.mapper.ReviewLineMapper;
-import mate.academy.boot.bootdemo.model.mapper.ReviewMapper;
 import mate.academy.boot.bootdemo.model.mapper.UserMapper;
 import mate.academy.boot.bootdemo.service.FileParser;
 import mate.academy.boot.bootdemo.service.FileReaderService;
@@ -19,10 +20,6 @@ import mate.academy.boot.bootdemo.service.ReviewService;
 import mate.academy.boot.bootdemo.service.RoleService;
 import mate.academy.boot.bootdemo.service.UserService;
 import org.springframework.stereotype.Controller;
-
-import javax.annotation.PostConstruct;
-import java.util.List;
-import java.util.Set;
 
 @Controller
 public class InjectDataController {
@@ -39,8 +36,6 @@ public class InjectDataController {
 
     private final UserService userService;
 
-    private final ReviewMapper reviewMapper;
-
     private final ReviewLineMapper reviewLineMapper;
 
     private final ReviewService reviewService;
@@ -53,7 +48,7 @@ public class InjectDataController {
                                 FileReaderService fileReaderService,
                                 FileParser<List<ReviewLineDto>> fileParser,
                                 UserMapper userMapper, UserService userService,
-                                ReviewMapper reviewMapper, ReviewLineMapper reviewLineMapper, ReviewService reviewService,
+                                ReviewLineMapper reviewLineMapper, ReviewService reviewService,
                                 ProductMapper productMapper, ProductService productService) {
         this.roleService = roleService;
         this.internetUserService = internetUserService;
@@ -61,22 +56,18 @@ public class InjectDataController {
         this.fileParser = fileParser;
         this.userMapper = userMapper;
         this.userService = userService;
-        this.reviewMapper = reviewMapper;
         this.reviewLineMapper = reviewLineMapper;
         this.reviewService = reviewService;
         this.productMapper = productMapper;
         this.productService = productService;
     }
 
-    @PostConstruct
+   // @PostConstruct
     public void injectData() {
         injectUsers();
-
         List<String> data = fileReaderService.readFile("C:/Users/Reviews.csv");
         data.remove(0);
-
         List<ReviewLineDto> reviewDtos = fileParser.parse(data);
-
         for (ReviewLineDto reviewLineDto : reviewDtos) {
             User user = userMapper.getUserFromReviewLine(reviewLineDto);
             System.out.println(userService.save(user));
@@ -86,7 +77,6 @@ public class InjectDataController {
             System.out.println(reviewService.save(review));
         }
     }
-
 
     private void injectUsers() {
         Role userRole = new Role();

@@ -1,10 +1,9 @@
 package mate.academy.boot.bootdemo.model.dto;
 
+import java.util.Set;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 import mate.academy.boot.bootdemo.model.Review;
-
-import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 @Data
 public class InternetUserDto {

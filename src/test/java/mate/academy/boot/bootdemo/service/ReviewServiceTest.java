@@ -13,6 +13,7 @@ public class ReviewServiceTest {
     private AnnotationConfigApplicationContext context
             = new AnnotationConfigApplicationContext("mate.academy.boot.bootdemo");
     private final ReviewService reviewService = context.getBean(ReviewService.class);
+    private final UserService userService = context.getBean(UserService.class);
     private final Review firstReview = new Review();
     private final Review secondReview = new Review();
 
@@ -46,9 +47,15 @@ public class ReviewServiceTest {
     @Test
     public void findMostActiveUsersTest() {
         Assert.assertEquals(List.of(new User(firstReview.getProfileName())),
-                reviewService.getMostActiveUsers(1));
+                userService.findActiveUsers(1, 1));
         Assert.assertEquals(List.of(new User(secondReview.getProfileName()),
                 new User(firstReview.getProfileName())),
-                reviewService.getMostActiveUsers(10));
+                userService.findActiveUsers(10, 10));
+    }
+
+    @Test
+    public void deleteTest() {
+        reviewService.deleteById(firstReview.getId());
+        Assert.assertEquals(List.of(secondReview), reviewService.findAll());
     }
 }

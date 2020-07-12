@@ -30,10 +30,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/register")
                 .permitAll()
+                .antMatchers(
+                        "/v2/api-docs",
+                        "/swagger-resources/**",
+                        "/swagger-ui.html",
+                        "/webjars/**",
+                        "/swagger.json")
+                .permitAll()
                 .antMatchers(HttpMethod.POST, "/reviews/**")
                 .hasRole("USER")
                 .antMatchers(HttpMethod.PUT, "/reviews/**")
                 .hasRole("USER")
+                .antMatchers(HttpMethod.DELETE, "/reviews/**")
+                .hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/reviews", "/products", "/users")
                 .hasRole("ADMIN")
                 .anyRequest()
@@ -47,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .csrf()
-                .disable().headers().frameOptions().disable();
+                .disable();
     }
 
     @Bean

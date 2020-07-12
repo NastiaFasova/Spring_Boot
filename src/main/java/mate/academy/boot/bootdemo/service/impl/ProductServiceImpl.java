@@ -2,20 +2,18 @@ package mate.academy.boot.bootdemo.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-import javax.persistence.EntityManager;
 import mate.academy.boot.bootdemo.model.Product;
 import mate.academy.boot.bootdemo.repository.ProductRepository;
 import mate.academy.boot.bootdemo.service.ProductService;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
-    private final EntityManager manager;
 
-    public ProductServiceImpl(ProductRepository productRepository, EntityManager manager) {
+    public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
-        this.manager = manager;
     }
 
     @Override
@@ -34,9 +32,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getMostCommentedProducts(int limit) {
-        return manager.createQuery("SELECT new Product(p.id) FROM Product p "
-                + "GROUP BY p.id ORDER BY COUNT(p.id) desc", Product.class)
-                .setMaxResults(limit).getResultList();
+    public List<Product> getMostCommentedProducts(int page, int limit) {
+        PageRequest pageRequest = PageRequest.of(page, limit);
+        return productRepository.findAll(pageRequest).getContent();
     }
 }
