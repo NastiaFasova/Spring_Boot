@@ -62,7 +62,7 @@ public class InjectDataController {
         this.productService = productService;
     }
 
-   // @PostConstruct
+    @PostConstruct
     public void injectData() {
         injectUsers();
         List<String> data = fileReaderService.readFile("C:/Users/Reviews.csv");
