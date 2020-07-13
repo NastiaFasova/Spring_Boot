@@ -12,5 +12,5 @@ public interface UserService {
 
     Optional<User> findById(String id);
 
-    List<User> findActiveUsers(int page, int limit);
+    List<User> findActiveUsers(int page, int limit, String sortBy);
 }

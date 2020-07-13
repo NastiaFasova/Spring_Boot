@@ -13,11 +13,11 @@ import mate.academy.boot.bootdemo.service.ReviewService;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -51,13 +51,13 @@ public class ReviewController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/review")
-    public ReviewDto getReviewById(@RequestParam Long id) {
+    @GetMapping("/{id}")
+    public ReviewDto getReviewById(@PathVariable Long id) {
         return reviewMapper.getReviewDto(reviewService.findById(id).orElseThrow());
     }
 
-    @DeleteMapping
-    public String deleteById(@RequestParam Long id) {
+    @DeleteMapping("/{id}")
+    public String deleteById(@PathVariable Long id) {
         reviewService.deleteById(id);
         return "Comment was successfully deleted";
     }

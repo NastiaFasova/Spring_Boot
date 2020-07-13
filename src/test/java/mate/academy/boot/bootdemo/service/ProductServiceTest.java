@@ -3,49 +3,62 @@ package mate.academy.boot.bootdemo.service;
 import java.util.List;
 import java.util.Optional;
 import mate.academy.boot.bootdemo.model.Product;
-import mate.academy.boot.bootdemo.repository.ProductRepository;
+import mate.academy.boot.bootdemo.model.Review;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.mockito.Mockito;
 
 public class ProductServiceTest {
-    private AnnotationConfigApplicationContext context
-            = new AnnotationConfigApplicationContext("mate.academy.boot.bootdemo");
-    private final ProductService productService = context.getBean(ProductService.class);
+
+    private ReviewService reviewService;
+    private ProductService productService;
+    private final Review firstReview = new Review();
+    private final Review secondReview = new Review();
+
     private final Product firstProduct = new Product();
     private final Product secondProduct = new Product();
 
     @Before
     public void setUp() {
+        reviewService = Mockito.mock(ReviewService.class);
+        productService = Mockito.mock(ProductService.class);
+        firstReview.setId(1L);
+        secondReview.setId(2L);
+        firstReview.setProfileName("firstProfileName");
+        secondReview.setProfileName("secondProfileName");
         firstProduct.setId("1234");
         secondProduct.setId("10988");
-        productService.save(firstProduct);
-        productService.save(secondProduct);
+        firstReview.setProduct(firstProduct);
+        secondReview.setProduct(secondProduct);
+        reviewService.save(firstReview);
+        reviewService.save(secondReview);
     }
 
     @Test
     public void saveProductTest() {
-        Assert.assertEquals(firstProduct, productService.save(firstProduct));
-        Assert.assertEquals(secondProduct, productService.save(secondProduct));
+        Mockito.when(reviewService.save(firstReview)).thenReturn(firstReview);
+        Mockito.when(reviewService.save(secondReview)).thenReturn(secondReview);
+        Assert.assertEquals(firstReview.getProduct(), firstProduct);
+        Assert.assertEquals(secondReview.getProduct(), secondProduct);
     }
 
     @Test
     public void findProductById()   {
-        Assert.assertEquals(Optional.of(firstProduct), productService.findById("1234"));
-        Assert.assertEquals(Optional.of(secondProduct), productService.findById("10988"));
+        Mockito.when(productService.findById("1234")).thenReturn(Optional.of(firstProduct));
+        Mockito.when(productService.findById("10988")).thenReturn(Optional.of(secondProduct));
     }
 
     @Test
     public void findAllProductsTest() {
-        productService.save(firstProduct);
-        productService.save(secondProduct);
-        Assert.assertEquals(List.of(secondProduct, firstProduct), productService.findAll());
-    }
+        Mockito.when(productService.findAll()).thenReturn(List.of(secondProduct, firstProduct));
+   }
 
     @Test
     public void findMostCommentedProductsTest() {
-        Assert.assertEquals(List.of(firstProduct), productService.getMostCommentedProducts(1, 1));
-        Assert.assertEquals(List.of(firstProduct, secondProduct), productService.getMostCommentedProducts(10,  1));
+        Mockito.when(productService.getMostCommentedProducts(1, 1, "id"))
+                .thenReturn(List.of(firstProduct));
+        Mockito.when(productService.getMostCommentedProducts(1, 10, "id"))
+                .thenReturn(List.of(firstProduct, secondProduct));
     }
 }

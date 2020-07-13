@@ -7,6 +7,7 @@ import mate.academy.boot.bootdemo.model.dto.UserDto;
 import mate.academy.boot.bootdemo.model.mapper.UserMapper;
 import mate.academy.boot.bootdemo.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,15 +27,16 @@ public class UserController {
     @GetMapping("/most-active")
     public List<UserDto> getMostActiveUsers(@RequestParam(name = "page", required = false,
             defaultValue = "0") int page, @RequestParam(name = "limit", required = false,
-            defaultValue = "1000") int limit) {
-        List<User> users = userService.findActiveUsers(page, limit);
+            defaultValue = "1000") int limit, @RequestParam(name = "sortBy", required = false,
+            defaultValue = "profileName") String sortBy) {
+        List<User> users = userService.findActiveUsers(page, limit, sortBy);
         return users.stream()
                 .map(userMapper::getUserDto)
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/user")
-    public UserDto getUserById(@RequestParam(name = "id") String id) {
+    @GetMapping("/{id}")
+    public UserDto getUserById(@PathVariable String id) {
         return userMapper.getUserDto(userService.findById(id).orElseThrow());
     }
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CsvLinesParser implements FileParser<List<ReviewLineDto>> {
+    private static final int MAX_CHARS_PER_COLUMN = 100000;
     private final ReviewFromLinesMapper mapper;
 
     public CsvLinesParser(ReviewFromLinesMapper mapper) {
@@ -20,7 +21,7 @@ public class CsvLinesParser implements FileParser<List<ReviewLineDto>> {
     @Override
     public List<ReviewLineDto> parse(List<String> usersData) {
         CsvParserSettings settings = new CsvParserSettings();
-        settings.setMaxCharsPerColumn(100000);
+        settings.setMaxCharsPerColumn(MAX_CHARS_PER_COLUMN);
         CsvParser csvParser = new CsvParser(settings);
         List<ReviewLineDto> reviewLineDtos = new ArrayList<>();
         for (String user : usersData) {

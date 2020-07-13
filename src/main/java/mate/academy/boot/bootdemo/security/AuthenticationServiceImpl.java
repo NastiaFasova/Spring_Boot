@@ -38,6 +38,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
         Role role = roleService.getRoleByName("USER");
         newUser.setRoles(Set.of(role));
-        return internetUserService.save(newUser);
+        internetUserService.save(newUser);
+        return newUser;
     }
 }

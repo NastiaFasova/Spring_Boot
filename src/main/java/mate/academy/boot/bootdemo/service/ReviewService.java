@@ -11,7 +11,7 @@ public interface ReviewService {
 
     Optional<Review> findById(Long id);
 
-    void deleteById(Long id);
+    boolean deleteById(Long id);
 
     Review findByIdAndUserLogin(Long id, String login);
 }

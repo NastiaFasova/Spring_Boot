@@ -11,5 +11,5 @@ public interface ProductService {
 
     Optional<Product> findById(String id);
 
-    List<Product> getMostCommentedProducts(int page, int limit);
+    List<Product> getMostCommentedProducts(int page, int limit, String sortBy);
 }

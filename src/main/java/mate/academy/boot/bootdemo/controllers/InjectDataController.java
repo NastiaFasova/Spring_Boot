@@ -19,9 +19,9 @@ import mate.academy.boot.bootdemo.service.ProductService;
 import mate.academy.boot.bootdemo.service.ReviewService;
 import mate.academy.boot.bootdemo.service.RoleService;
 import mate.academy.boot.bootdemo.service.UserService;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 
-@Controller
+@Component
 public class InjectDataController {
 
     private final RoleService roleService;
@@ -70,11 +70,11 @@ public class InjectDataController {
         List<ReviewLineDto> reviewDtos = fileParser.parse(data);
         for (ReviewLineDto reviewLineDto : reviewDtos) {
             User user = userMapper.getUserFromReviewLine(reviewLineDto);
-            System.out.println(userService.save(user));
+            userService.save(user);
             Product product = productMapper.getProductFromReviewLine(reviewLineDto);
-            System.out.println(productService.save(product));
+            productService.save(product);
             Review review = reviewLineMapper.getReviewFromLine(reviewLineDto);
-            System.out.println(reviewService.save(review));
+            reviewService.save(review);
         }
     }
 
