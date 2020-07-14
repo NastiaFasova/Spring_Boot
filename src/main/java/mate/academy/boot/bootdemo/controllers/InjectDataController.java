@@ -66,7 +66,6 @@ public class InjectDataController {
     public void injectData() {
         injectUsers();
         List<String> data = fileReaderService.readFile("C:/Users/Reviews.csv");
-        data.remove(0);
         List<ReviewLineDto> reviewDtos = fileParser.parse(data);
         for (ReviewLineDto reviewLineDto : reviewDtos) {
             User user = userMapper.getUserFromReviewLine(reviewLineDto);
