@@ -3,8 +3,6 @@ package mate.academy.boot.bootdemo.service;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.util.List;
-
-import mate.academy.boot.bootdemo.model.dto.ReviewDto;
 import mate.academy.boot.bootdemo.model.dto.ReviewLineDto;
 import mate.academy.boot.bootdemo.model.mapper.ReviewFromLinesMapper;
 import mate.academy.boot.bootdemo.service.impl.CsvLinesParser;

@@ -35,7 +35,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public InternetUser register(String email, String password) throws AuthenticationException {
         InternetUser newUser = new InternetUser();
         newUser.setLogin(email);
-        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        newUser.setPassword(passwordEncoder.encode(password));
         Role role = roleService.getRoleByName("USER");
         newUser.setRoles(Set.of(role));
         internetUserService.save(newUser);

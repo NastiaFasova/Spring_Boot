@@ -24,6 +24,6 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role getRoleByName(String roleName) {
         LOGGER.info("The role with name " + roleName + " was successfully retrieved from the db");
-        return roleRepository.getRoleByName(roleName).orElseThrow();
+        return roleRepository.getRoleByName(Role.RoleName.valueOf(roleName)).orElseThrow();
     }
 }
