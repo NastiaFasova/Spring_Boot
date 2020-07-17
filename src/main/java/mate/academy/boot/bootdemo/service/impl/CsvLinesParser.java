@@ -1,27 +1,33 @@
 package mate.academy.boot.bootdemo.service.impl;
 
+import com.univocity.parsers.csv.CsvParser;
+import com.univocity.parsers.csv.CsvParserSettings;
 import java.util.ArrayList;
 import java.util.List;
-import mate.academy.boot.bootdemo.model.dto.UserDto;
-import mate.academy.boot.bootdemo.model.dto.mapper.UserDtoFromLinesMapper;
+import mate.academy.boot.bootdemo.model.dto.ReviewLineDto;
+import mate.academy.boot.bootdemo.model.mapper.ReviewFromLinesMapper;
 import mate.academy.boot.bootdemo.service.FileParser;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CsvLinesParser implements FileParser<List<UserDto>> {
-    private final UserDtoFromLinesMapper mapper;
+public class CsvLinesParser implements FileParser<List<ReviewLineDto>> {
+    private static final int MAX_CHARS_PER_COLUMN = 100000;
+    private final ReviewFromLinesMapper mapper;
 
-    public CsvLinesParser(UserDtoFromLinesMapper mapper) {
+    public CsvLinesParser(ReviewFromLinesMapper mapper) {
         this.mapper = mapper;
     }
 
     @Override
-    public List<UserDto> parse(List<String> usersData) {
-        List<UserDto> users = new ArrayList<>();
+    public List<ReviewLineDto> parse(List<String> usersData) {
+        CsvParserSettings settings = new CsvParserSettings();
+        settings.setMaxCharsPerColumn(MAX_CHARS_PER_COLUMN);
+        CsvParser csvParser = new CsvParser(settings);
+        List<ReviewLineDto> reviewLineDtos = new ArrayList<>();
         for (String user : usersData) {
-            String[] userData = user.split(",");
-            users.add(mapper.getUserDtoFromLines(userData));
+            String[] parsedLine = csvParser.parseLine(user);
+            reviewLineDtos.add(mapper.getReviewLinesDtoFromLines(parsedLine));
         }
-        return users;
+        return reviewLineDtos;
     }
 }

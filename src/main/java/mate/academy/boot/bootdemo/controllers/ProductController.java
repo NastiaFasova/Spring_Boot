@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -31,7 +32,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ProductDto getProductById(@PathVariable Long id) {
+    public ProductDto getProductById(@PathVariable String id) {
         return productMapper.getProductDto(productService.findById(id).orElseThrow());
     }
 
@@ -43,9 +44,12 @@ public class ProductController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/most-commented-food-items/{limit}")
-    public List<ProductDto> getMostCommentedFood(@PathVariable int limit) {
-        List<Product> products = productService.getMostCommentedProducts(limit);
+    @GetMapping("/most-commented-food-items")
+    public List<ProductDto> getMostCommentedFood(@RequestParam(name = "limit", required = false,
+            defaultValue = "0")int page, @RequestParam(name = "limit", required = false,
+            defaultValue = "1000") int limit, @RequestParam(name = "sortBy", required = false,
+            defaultValue = "id") String sortBy) {
+        List<Product> products = productService.getMostCommentedProducts(page, limit, sortBy);
         return products.stream()
                 .map(productMapper::getProductDto)
                 .collect(Collectors.toList());

@@ -1,12 +1,12 @@
 package mate.academy.boot.bootdemo.model;
 
 import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,15 +15,16 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "products")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @OneToMany(mappedBy = "product")
-    private Set<Review> reviews;
+    @NotNull
+    private String id;
 
-    public Product(Long id) {
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Column(length = 50000)
+    private Set<String> reviews;
+
+    public Product(String id) {
         this.id = id;
     }
 }

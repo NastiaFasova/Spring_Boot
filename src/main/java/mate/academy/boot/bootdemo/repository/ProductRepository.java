@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    @Query("select new Product(p.id) from Product p LEFT JOIN p.reviews")
+    @Query("select r.product from Review r")
     List<Product> findAll();
 
-    @Query("select new Product(p.id) from Product p LEFT JOIN p.reviews WHERE p.id = ?1")
-    Optional<Product> findById(Long id);
+    @Query("select r.product from Review r where r.product.id = :id")
+    Optional<Product> findById(String id);
 }
