@@ -41,7 +41,7 @@ public class ReviewRepositoryTest {
     @Test
     public void findByIdAndLoginTest() {
         InternetUser internetUser = new InternetUser();
-        internetUser.setLogin("login");
+        internetUser.setUsername("login");
         internetUser = entityManager.persistAndFlush(internetUser);
         review.setInternetUser(internetUser);
         review = entityManager.persistAndFlush(review);

@@ -19,6 +19,7 @@ import mate.academy.boot.bootdemo.service.ProductService;
 import mate.academy.boot.bootdemo.service.ReviewService;
 import mate.academy.boot.bootdemo.service.RoleService;
 import mate.academy.boot.bootdemo.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -44,12 +45,15 @@ public class InjectDataController {
 
     private final ProductService productService;
 
+    private final PasswordEncoder passwordEncoder;
+
     public InjectDataController(RoleService roleService, InternetUserService internetUserService,
                                 FileReaderService fileReaderService,
                                 FileParser<List<ReviewLineDto>> fileParser,
                                 UserMapper userMapper, UserService userService,
                                 ReviewLineMapper reviewLineMapper, ReviewService reviewService,
-                                ProductMapper productMapper, ProductService productService) {
+                                ProductMapper productMapper, ProductService productService,
+                                PasswordEncoder passwordEncoder) {
         this.roleService = roleService;
         this.internetUserService = internetUserService;
         this.fileReaderService = fileReaderService;
@@ -60,6 +64,7 @@ public class InjectDataController {
         this.reviewService = reviewService;
         this.productMapper = productMapper;
         this.productService = productService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
@@ -82,8 +87,8 @@ public class InjectDataController {
         userRole.setRoleName(Role.RoleName.USER);
         InternetUser user = new InternetUser();
 
-        user.setLogin("user@ukr.net");
-        user.setPassword("1111");
+        user.setUsername("user@ukr.net");
+        user.setPassword(passwordEncoder.encode("1111"));
         user.setRoles(Set.of(userRole));
         roleService.save(userRole);
         internetUserService.save(user);
@@ -91,8 +96,8 @@ public class InjectDataController {
         Role adminRole = new Role();
         adminRole.setRoleName(Role.RoleName.ADMIN);
         InternetUser admin = new InternetUser();
-        admin.setLogin("admin@gmail.com");
-        admin.setPassword("9999");
+        admin.setUsername("admin@gmail.com");
+        admin.setPassword(passwordEncoder.encode("9999"));
         admin.setRoles(Set.of(adminRole));
         roleService.save(adminRole);
         internetUserService.save(admin);

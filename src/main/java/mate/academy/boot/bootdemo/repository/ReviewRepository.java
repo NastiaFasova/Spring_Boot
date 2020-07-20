@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     void deleteById(Long id);
 
-    @Query("SELECT r FROM Review r where r.id = :id AND r.internetUser.login = :login")
+    @Query("SELECT r FROM Review r where r.id = :id AND r.internetUser.username = :login")
     Review findByIdAndUserLogin(Long id, String login);
 
 }

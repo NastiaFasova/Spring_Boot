@@ -36,7 +36,7 @@ public class AuthenticationServiceTest {
     public void loginTest() {
         userFromDb = new InternetUser();
         String password = "1111";
-        userFromDb.setLogin("bob");
+        userFromDb.setUsername("bob");
         userFromDb.setPassword(password);
         when(internetUserService.getByEmail("bob")).thenReturn(userFromDb);
         when(passwordEncoder.matches(password, userFromDb.getPassword())).thenReturn(true);
@@ -49,7 +49,7 @@ public class AuthenticationServiceTest {
         InternetUser internetUser = new InternetUser();
         String email = "login";
         String password = "password";
-        internetUser.setLogin(email);
+        internetUser.setUsername(email);
         internetUser.setPassword(password);
         Role role = new Role();
         role.setRoleName(Role.RoleName.USER);
