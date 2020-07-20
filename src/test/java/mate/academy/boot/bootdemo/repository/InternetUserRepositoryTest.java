@@ -26,7 +26,7 @@ public class InternetUserRepositoryTest {
 
     @Test
     public void findByLoginTest() {
-        internetUser.setLogin("login");
+        internetUser.setUsername("login");
         internetUser = entityManager.persistAndFlush(internetUser);
         Assert.assertEquals(internetUser, internetUserRepository.findByLogin("login"));
     }
