@@ -41,10 +41,10 @@ public class UserRepositoryTest {
     public void getAllProductsTest() {
         User firstUser = new User();
         User secondUser = new User();
-        Review firstReview = new Review();
-        Review secondReview = new Review();
         firstUser.setId("firstUser");
         secondUser.setId("secondUser");
+        Review firstReview = new Review();
+        Review secondReview = new Review();
         firstReview.setUser(firstUser);
         secondReview.setUser(secondUser);
         firstUser = entityManager.persistAndFlush(firstUser);
