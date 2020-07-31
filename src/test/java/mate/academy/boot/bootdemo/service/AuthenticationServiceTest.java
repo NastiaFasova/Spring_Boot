@@ -1,5 +1,7 @@
 package mate.academy.boot.bootdemo.service;
 
+import static org.mockito.Mockito.when;
+
 import java.util.Set;
 import mate.academy.boot.bootdemo.model.InternetUser;
 import mate.academy.boot.bootdemo.model.Role;
@@ -15,8 +17,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import static org.mockito.Mockito.when;
-
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
 public class AuthenticationServiceTest {
@@ -30,7 +30,6 @@ public class AuthenticationServiceTest {
     @InjectMocks
     private AuthenticationServiceImpl authenticationService;
     private InternetUser userFromDb;
-
 
     @Test
     public void loginTest() {

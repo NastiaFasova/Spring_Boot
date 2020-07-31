@@ -41,10 +41,10 @@ public class ProductRepositoryTest {
     public void getAllProductsTest() {
         Product firstProduct = new Product();
         Product secondProduct = new Product();
-        Review firstReview = new Review();
-        Review secondReview = new Review();
         firstProduct.setId("firstProduct");
         secondProduct.setId("secondProduct");
+        Review firstReview = new Review();
+        Review secondReview = new Review();
         firstReview.setProduct(firstProduct);
         secondReview.setProduct(secondProduct);
         firstProduct = entityManager.persistAndFlush(firstProduct);
