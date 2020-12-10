@@ -1,9 +1,9 @@
-package mate.academy.boot.bootdemo.model.dto.mapper;
+package mate.academy.boot.bootdemo.model.mapper;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import mate.academy.boot.bootdemo.model.dto.UserDto;
+
 import org.springframework.stereotype.Component;
 
 @Component
